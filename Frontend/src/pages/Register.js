@@ -27,7 +27,6 @@ const Register = () => {
         "Registration successful! Your account is pending superadmin approval. You can log in once activated."
       );
       setForm({ username: "", email: "", password: "" });
-      // optionally redirect to login after small delay
       setTimeout(() => {
         navigate("/login");
       }, 2000);
