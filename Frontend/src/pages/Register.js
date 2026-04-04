@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
+import { UserPlus } from "lucide-react";
+import "../styles/Register.css";
 
 const Register = () => {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
@@ -37,43 +39,85 @@ const Register = () => {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "2rem auto" }}>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username</label>
-          <input
-            type="text"
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-            required
-          />
+    <div className="register-container">
+      <div className="register-card card glass-panel">
+        <div className="register-header">
+          <div className="register-icon">
+            <UserPlus size={36} />
+          </div>
+          <h2 className="register-title">Create Account</h2>
+          <p className="register-subtitle">
+            Join Expense-Tracker to manage your finances
+          </p>
         </div>
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        {error && <div style={{ color: "red" }}>{error}</div>}
-        {success && <div style={{ color: "green" }}>{success}</div>}
-        <button type="submit">Register</button>
-      </form>
+
+        {error && (
+          <div className="register-error">
+            <span>{error}</span>
+          </div>
+        )}
+
+        {success && (
+          <div className="register-success">
+            <span>{success}</span>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label className="form-label" htmlFor="username">
+              Username
+            </label>
+            <input
+              id="username"
+              type="text"
+              name="username"
+              className="form-input"
+              value={form.username}
+              onChange={handleChange}
+              required
+              placeholder="Enter your username"
+            />
+          </div>
+          <div className="form-group">
+            <label className="form-label" htmlFor="email">
+              Email Address
+            </label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              className="form-input"
+              value={form.email}
+              onChange={handleChange}
+              required
+              placeholder="admin@example.com"
+            />
+          </div>
+          <div className="form-group register-form-group">
+            <label className="form-label" htmlFor="password">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              className="form-input"
+              value={form.password}
+              onChange={handleChange}
+              required
+              placeholder="••••••••"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="btn btn-primary register-submit-btn"
+          >
+            Register
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
