@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import api from "../api/axios";
-import { Wallet, Search, Edit3, Trash2 } from "lucide-react";
+import { Wallet, Search, Edit3, Trash2, Filter } from "lucide-react";
 import "../styles/Dashboard.css";
-
+  
 const AllTransactions = () => {
   const [transactions, setTransactions] = useState([]);
   const [admins, setAdmins] = useState([]);
@@ -18,6 +18,19 @@ const AllTransactions = () => {
     date: new Date().toISOString().split("T")[0],
     note: "",
   });
+  const [filter, setFilter] = useState("");
+
+  useEffect(() => {
+    const applyFilter = async () => {
+      try {
+        const transactionres = await api.get(`/transactions?type=${filter.toLowerCase()}`);
+        setTransactions(transactionres.data.transactions || []); 
+      } catch (err) {
+        console.error("Error applying filter", err);
+      }
+    };
+    applyFilter();
+  }, [filter])
 
   const fetchTransactions = useCallback(async () => {
     try {
@@ -168,9 +181,22 @@ const AllTransactions = () => {
               }}
             />
           </div>
+          <div className="filter-container">
+          <div className="filter-section mt-2rem">
+            <Filter size={18} color="var(--text-secondary)" />
+            <select
+              className="form-input filter-select"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+            >
+              <option value="">All Types</option>
+              <option value="Income">Income</option>
+              <option value="Expense">Expense</option>
+            </select>
+          </div>
         </div>
-      </div>
-
+        </div>
+        </div>
       <div
         className="glass-panel"
         style={{ padding: "1.5rem", overflow: "hidden" }}

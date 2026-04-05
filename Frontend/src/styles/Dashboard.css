@@ -36,7 +36,6 @@
   font-weight: bold;
 }
 
-/* Filter Section */
 .filter-container {
   display: flex;
   justify-content: space-between;
@@ -48,6 +47,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  margin-top: 1.5rem;
 }
 
 .filter-select {

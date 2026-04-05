@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { Wallet, LogIn, AlertCircle } from "lucide-react";
+import { LogIn, AlertCircle } from "lucide-react";
 import "../styles/Login.css";
 
 const Login = () => {
@@ -12,7 +12,6 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // If already logged in, redirect to dashboard
   if (user && !loading) {
     return <Navigate to="/" replace />;
   }
@@ -37,18 +36,9 @@ const Login = () => {
     <div className="login-container">
       <div className="login-card card glass-panel">
         <div className="login-header">
-          <div className="login-icon">
-            <Wallet size={36} />
-          </div>
           <h2 className="login-title">
-            Welcome to Expense-Tracker
+            ExpenseTracker
           </h2>
-          <p className="login-subtitle">
-            Sign in to manage your expenses
-          </p>
-          <p className="text-sm" style={{ marginTop: "0.5rem" }}>
-            New here? <a href="/register">Register</a>. Your account will require superadmin approval before you can log in.
-          </p>
         </div>
 
         {error && (
@@ -101,7 +91,10 @@ const Login = () => {
                 <LogIn size={20} /> Sign In
               </>
             )}
-          </button>
+          </button><br/><br/>
+          <p className="text-sm" style={{ marginTop: "0.5rem" }}>
+            New here? <a href="/register">Register</a>. Your account will require superadmin approval before you can log in.
+          </p>
         </form>
       </div>
     </div>

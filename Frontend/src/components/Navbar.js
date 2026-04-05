@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { Moon, Sun, Wallet } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
@@ -28,7 +28,6 @@ const Navbar = () => {
     return (
       <nav className="glass-panel navbar-guest">
         <div className="navbar-logo-text">
-          <Wallet size={28} />
           Expense-Tracker
         </div>
         <button className="btn btn-outline" onClick={toggleTheme}>
@@ -44,7 +43,7 @@ const Navbar = () => {
         <span>Expense-Tracker</span>
       </Link>
 
-      <div className="navbar-nav">
+      <div className="navbar-nav navbar-center">
         <Link
           to="/"
           className={`btn btn-outline navbar-link ${location.pathname === "/" ? "active-link" : ""}`}

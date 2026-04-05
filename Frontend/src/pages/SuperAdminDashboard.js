@@ -54,9 +54,9 @@ const SuperAdminDashboard = () => {
     <div className="dashboard-container">
       <div className="dashboard-action-bar mb-1-5rem">
         <h2>Superadmin Dashboard</h2>
-        <Link to="/superadmin" className="btn btn-outline">
+        {/* <Link to="/superadmin" className="btn btn-outline">
           Manage Admins
-        </Link>
+        </Link> */}
       </div>
 
       <div className="grid-auto-fit mb-1-5rem">
@@ -111,9 +111,10 @@ const SuperAdminDashboard = () => {
         style={{ padding: "1.25rem", overflow: "hidden" }}
       >
         <div className="filter-container mb-1rem">
-          <h3 className="text-md">Recent Transactions</h3>
-          <Link to="/all-transactions" className="btn btn-outline">
-            View All Transactions
+          <h3 className="text-md">All Admins Transactions</h3>
+          <Link to="/all-transactions" className="btn btn-outline"
+          style={{ textDecoration: "none" }}>
+            Manage Transactions
           </Link>
         </div>
 

@@ -14,13 +14,11 @@ import "../styles/Dashboard.css";
 const Dashboard = () => {
   const [transactions, setTransactions] = useState([]);
   const [summary, setSummary] = useState({ income: 0, expense: 0, balance: 0 });
-  const [filter, setFilter] = useState(""); // '' means All, 'Income' or 'Expense'
+  const [filter, setFilter] = useState("");
 
-  // Modal State
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
-  // Form State
   const [formData, setFormData] = useState({
     title: "",
     amount: "",
@@ -32,7 +30,6 @@ const Dashboard = () => {
 
   const fetchData = useCallback(async () => {
     try {
-      // Fetch summary
       const sumRes = await api.get("/transactions/summary");
       const summaryData = sumRes.data?.summary || sumRes.data || {};
       setSummary({
@@ -90,7 +87,7 @@ const Dashboard = () => {
     if (window.confirm("Are you sure you want to delete this transaction?")) {
       try {
         await api.delete(`/transactions/${id}`);
-        fetchData(); // Refresh summary and list
+        fetchData();
       } catch (err) {
         alert("Failed to delete");
       }
@@ -98,24 +95,28 @@ const Dashboard = () => {
   };
 
   const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const payload = { ...formData, amount: Number(formData.amount) };
-      if (editingId) {
-        await api.put(`/transactions/${editingId}`, payload);
-      } else {
-        await api.post("/transactions", payload);
-      }
-      setShowModal(false);
-      fetchData();
-    } catch (err) {
-      alert(err.response?.data?.message || "Error saving transaction");
+  e.preventDefault();
+  const today = new Date().toISOString().split("T")[0];
+  if (formData.date > today) {
+    alert("Future dates are not allowed");
+    return;
+  }
+  try {
+    const payload = {...formData,amount: Number(formData.amount)};
+    if (editingId) {
+      await api.put(`/transactions/${editingId}`, payload);
+    } else {
+      await api.post("/transactions", payload);
     }
-  };
+    setShowModal(false);
+    fetchData();
+  } catch (err) {
+    alert(err.response?.data?.message || "Error saving transaction");
+  }
+};
 
   return (
     <div className="dashboard-container">
-      {/* Top Action Bar */}
       <div className="dashboard-action-bar">
         <h2>Transactions</h2>
         <button className="btn btn-primary" onClick={() => handleOpenModal()}>
@@ -123,7 +124,6 @@ const Dashboard = () => {
         </button>
       </div>
 
-      {/* Summary Cards */}
       <div className="grid-auto-fit mb-2rem">
         <div
           className="card summary-card income"
@@ -168,7 +168,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Filter and Table */}
       <div
         className="glass-panel"
         style={{ padding: "1.5rem", overflow: "hidden" }}
@@ -259,7 +258,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Add/Edit Modal */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -372,6 +370,7 @@ const Dashboard = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, date: e.target.value })
                     }
+                    max={new Date().toISOString().split("T")[0]}
                   />
                 </div>
               </div>

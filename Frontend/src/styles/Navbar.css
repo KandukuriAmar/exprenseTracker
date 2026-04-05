@@ -1,20 +1,29 @@
-/* Navbar */
 .navbar-container {
   margin: 1rem;
   padding: 1rem 2rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 }
 
 .navbar-brand {
+  flex: 1;
   text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   font-weight: bold;
   font-size: 1.25rem;
   color: var(--text-primary);
+}
+
+.navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.navbar-container > .navbar-nav:last-child {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .navbar-logo-text {
