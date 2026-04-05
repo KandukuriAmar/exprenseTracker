@@ -115,10 +115,12 @@ const Register = () => {
           >
             Register
           </button>
-        </form>
+        </form><br/>
+        <p className="register-link text-center mt-3 text-white"> Already have an account?{" "}<a href="/login" style={{ textDecoration: "none" }}>Login</a>
+        </p>      
       </div>
     </div>
-  );
+  )
 };
 
 export default Register;
