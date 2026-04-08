@@ -15,6 +15,7 @@ const corsMiddleware = cors({
       callback(new Error("Not allowed by CORS"));
     }
   },
+  origin: "http://localhost:3000",
   credentials: true,
 });
 
