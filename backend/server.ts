@@ -29,8 +29,8 @@ app.use(corsMiddleware);
   }
 })();
 
-app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/users", userRouter);
 app.use("/api/transactions", transactionRouter);
 
 app.listen(PORT, () =>
