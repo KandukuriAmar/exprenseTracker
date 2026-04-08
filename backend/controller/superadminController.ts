@@ -1,6 +1,5 @@
 import Users from "../models/Admin.js";
 import Transactions from "../models/Transactions.js";
-import PasswordResetRequest from "../models/PasswordResetRequest.js";
 import bcrypt from "bcrypt";
 import type { Request, Response } from "express";
 
@@ -168,13 +167,9 @@ const toggleUserStatusById = async (
 };
 export {
   getAllUsers,
-  getAllUsersWithBalance,
   addUser,
   deleteUserById,
   deleteUserByEmail,
   updateUserById,
-  toggleUserStatusById,
-  requestPasswordReset,
-  getPasswordResetRequests,
-  resolvePasswordReset,
+  toggleUserStatusById
 };
